@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "447913971582",
+    "firebase_url": "https://pig-shop-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "pig-shop",
+    "storage_bucket": "pig-shop.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447913971582:android:0b3a12037180ca3e1c6d2f",
+        "android_client_info": {
+          "package_name": "com.example.pig_shop_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgYj6-k6yGBjltkP6XZmkpiQ7pYrphzQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447913971582:android:cdeefe5c0f0a348f1c6d2f",
+        "android_client_info": {
+          "package_name": "pig_shop_app.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCgYj6-k6yGBjltkP6XZmkpiQ7pYrphzQQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

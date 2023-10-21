@@ -2,6 +2,7 @@ package com.example.pig_shop_app.User.Blogs;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -48,7 +49,7 @@ public class BlogList extends AppCompatActivity {
         postListView = findViewById(R.id.post_list);
         adapter = new BlogAdapter(this, postList);
         postListView.setAdapter(adapter);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         findViewById(R.id.add_button).setOnClickListener(view -> {
             Intent intent = new Intent(this, EditPostActivity.class);
             intent.putExtra("action", "add");
@@ -72,111 +73,14 @@ public class BlogList extends AppCompatActivity {
                         // Xử lý lỗi
                     }
                 });
-        postListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Post selectedPost = postList.get(position);
-                Intent intent = new Intent(BlogList.this, PostDetail.class);
-                intent.putExtra("postId", selectedPost.getId());
-                startActivity(intent);
-            }
-
-        });
-        postListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                // Xử lý khi người dùng nhấn giữ lâu trên một bài viết
-                Post selectedPost = postList.get(position);
-                showEditDialog(selectedPost);
-                return true;
-            }
-        });
     }
-    // Phương thức để hiển thị hộp thoại sửa bài viết
-    public void showEditDialog(final Post post) {
-        AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
-        View dialogView = getLayoutInflater().inflate(R.layout.activity_edit_post, null);
-        dialogBuilder.setView(dialogView);
-
-        final EditText editTextTitle = dialogView.findViewById(R.id.title);
-        final EditText editTextContent = dialogView.findViewById(R.id.content);
-        final EditText editTextDate = dialogView.findViewById(R.id.date);
-        final EditText editTextImage = dialogView.findViewById(R.id.image_view_post);
-        Button buttonUpdate = dialogView.findViewById(R.id.edit_button);
-        Button buttonDelete = dialogView.findViewById(R.id.delete_button);
-
-        editTextTitle.setText(post.getTitle());
-        editTextContent.setText(post.getContent());
-        editTextDate.setText(post.getDate());
-        editTextImage.setText(post.getImage());
-
-        final AlertDialog alertDialog = dialogBuilder.create();
-        alertDialog.show();
-
-        // Xử lý khi người dùng nhấn nút Cập nhật
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String updatedTitle = editTextTitle.getText().toString();
-                String updatedContent = editTextContent.getText().toString();
-                String updatedDate = editTextDate.getText().toString();
-                String updatedImage = editTextImage.getText().toString();
-
-                updatePost(post.getId(), updatedTitle, updatedContent, updatedDate, updatedImage);
-                alertDialog.dismiss();
-            }
-        });
-
-        // Xử lý khi người dùng nhấn nút Xóa
-        buttonDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                deletePost(post.getId());
-                alertDialog.dismiss();
-            }
-        });
-    }
-
-    //...
-
-    public void updatePost(String postId, String updatedTitle, String updatedContent, String updatedDate, String updatedImage) {
-        // Tạo một HashMap chứa thông tin đã cập nhật của bài viết
-        HashMap<String, Object> updatedValues = new HashMap<>();
-        updatedValues.put("title", updatedTitle);
-        updatedValues.put("content", updatedContent);
-        updatedValues.put("date", updatedDate);
-        updatedValues.put("image", updatedImage);
-        // Cập nhật thông tin bài viết trong FirebaseDatabase
-        databaseReference.child("blogs").child(postId).setValue(updatedValues)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(BlogList.this, "Cập nhật bài viết thành công", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(BlogList.this, "Cập nhật bài viết thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    public void deletePost(String postId) {
-        // Xóa bài viết khỏi FirebaseDatabase
-        databaseReference.child("blogs").child(postId).removeValue()
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        Toast.makeText(BlogList.this, "Xóa bài viết thành công", Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Toast.makeText(BlogList.this, "Xóa bài viết thất bại", Toast.LENGTH_SHORT).show();
-                    }
-                });
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click event here.
+            onBackPressed(); // This will simulate the Back button press.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

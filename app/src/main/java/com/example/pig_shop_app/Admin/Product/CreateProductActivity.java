@@ -6,12 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pig_shop_app.User.Product.Product;
 import com.example.pig_shop_app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class CreateProductActivity extends AppCompatActivity {
 
@@ -36,6 +40,29 @@ public class CreateProductActivity extends AppCompatActivity {
         createProductButton = findViewById(R.id.create_product_button);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("pigs");
+        String productId = getIntent().getStringExtra("product_id");
+        if (productId != null) {
+            FirebaseDatabase.getInstance().getReference("pigs").child(productId)
+                    .addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                Product product = dataSnapshot.getValue(Product.class);
+                                if (product != null) {
+                                    productNameEditText.setText(product.getTitle());
+                                    productSizeEditText.setText(product.getSize());
+                                    productPriceEditText.setText(product.getPrice());
+                                    productImageEditText.setText(product.getAvatar());
+                                    productDescriptionEditText.setText(product.getDescription());
+                                }
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            // Xử lý lỗi
+                        }
+            });
+        }
 
         createProductButton.setOnClickListener(new View.OnClickListener() {
             @Override

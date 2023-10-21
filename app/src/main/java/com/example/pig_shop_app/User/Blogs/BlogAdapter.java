@@ -1,6 +1,7 @@
 package com.example.pig_shop_app.User.Blogs;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,20 @@ public class BlogAdapter extends ArrayAdapter<Post> {
         viewHolder.contentText.setText(post.getContent());
         viewHolder.datetext.setText(post.getDate());
         viewHolder.imageView.setImageResource(R.drawable.lon);
-
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Tạo một Intent để chuyển đến activity mới
+                Intent intent = new Intent(context, EditPostActivity.class);
+                intent.putExtra("blog_id", post.getId());
+                intent.putExtra("title", post.getTitle());
+                intent.putExtra("content", post.getContent());
+                intent.putExtra("date", post.getDate());
+                intent.putExtra("imageResource", R.drawable.lon);
+                intent.putExtra("action", "edit");
+                context.startActivity(intent);
+            }
+        });
         return convertView;
     }
     private static class ViewHolder {

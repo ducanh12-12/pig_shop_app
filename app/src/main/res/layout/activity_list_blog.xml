@@ -23,17 +23,6 @@
             android:layout_height="wrap_content"
             android:text="Thêm bài viết" />
 
-        <Button
-            android:id="@+id/edit_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Sửa" />
-
-        <Button
-            android:id="@+id/delete_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Xóa" />
     </LinearLayout>
 
 </LinearLayout>

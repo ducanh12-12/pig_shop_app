@@ -28,7 +28,8 @@
         <activity android:name=".Admin.Product.CreateProductActivity" android:label="Tạo sản phẩm"></activity>
         <activity android:name=".Admin.Product.ProductTable" android:label="Danh sách sản phẩm"></activity>
         <activity android:name=".User.Blogs.BlogList" android:label="Danh sách bài viết"></activity>
-        <activity android:name=".User.Blogs.EditPostActivity" android:label="Danh sách bài viết"></activity>
+        <activity android:name=".User.Blogs.EditPostActivity" android:label="Bài viết"></activity>
+        <activity android:name=".User.Blogs.PostDetail" android:label="Bài viết chi tiết"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

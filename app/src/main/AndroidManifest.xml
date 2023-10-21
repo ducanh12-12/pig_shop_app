@@ -30,6 +30,9 @@
         <activity android:name=".User.Blogs.BlogList" android:label="Danh sách bài viết"></activity>
         <activity android:name=".User.Blogs.EditPostActivity" android:label="Bài viết"></activity>
         <activity android:name=".User.Blogs.PostDetail" android:label="Bài viết chi tiết"></activity>
+        <activity android:name=".Admin.User.AdminMain" android:label="Danh sách admin"></activity>
+        <activity android:name=".Admin.User.Add" android:label="Admin"></activity>
+        <activity android:name=".Admin.User.Login" android:label="Đăng nhập"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

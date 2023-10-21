@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.pig_shop_app.Admin.AdminActivity;
+import com.example.pig_shop_app.Admin.User.Login;
 import com.example.pig_shop_app.User.Product.ProductListActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.FirebaseDatabase;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
     });
         findViewById(R.id.admin_category).setOnClickListener(view -> {
-            Intent intent = new Intent(this, AdminActivity.class);
+            Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         });
     }

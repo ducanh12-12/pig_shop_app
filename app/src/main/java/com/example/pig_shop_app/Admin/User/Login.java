@@ -3,10 +3,14 @@ package com.example.pig_shop_app.Admin.User;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.example.pig_shop_app.Admin.AdminActivity;
+import com.example.pig_shop_app.R;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +30,7 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // lấy dữ liệu từ EditText gán vào các biến
         final EditText email = findViewById(R.id.edt_email);
         final EditText pass = findViewById(R.id.edt_pass);
@@ -61,7 +65,7 @@ public class Login extends AppCompatActivity {
 
                                     if (getpass != null && getpass.equals(passtxt)) {
                                         Toast.makeText(Login.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(Login.this, AdminMain.class));
+                                            startActivity(new Intent(Login.this, AdminActivity.class));
                                             saveUserRole(userRole); // Lưu userRole vào SharedPreferences
                                         finish();
                                     } else {
@@ -92,6 +96,14 @@ public class Login extends AppCompatActivity {
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("userRole", userRole);
         editor.apply();
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click event here.
+            onBackPressed(); // This will simulate the Back button press.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 //    // Mở hoạt động tùy thuộc vào userRole
 //    private void openRelevantActivity(Context context, String userRole) {

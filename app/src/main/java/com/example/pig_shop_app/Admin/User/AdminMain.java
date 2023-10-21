@@ -3,8 +3,9 @@ package com.example.pig_shop_app.Admin.User;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-
+import com.example.pig_shop_app.R;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,7 +37,7 @@ public class AdminMain extends AppCompatActivity {
         float_add = findViewById(R.id.float_add);
 
         final RecyclerView recyclerView = findViewById(R.id.recyclerView);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //set size sao cho recyclerview vừa với tất cả dữ liệu có trong nó
         recyclerView.setHasFixedSize(true);
 
@@ -89,5 +90,14 @@ public class AdminMain extends AppCompatActivity {
                 startActivity(new Intent(AdminMain.this, Add.class));
             }
         });
+
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click event here.
+            onBackPressed(); // This will simulate the Back button press.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

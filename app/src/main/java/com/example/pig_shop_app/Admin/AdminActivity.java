@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pig_shop_app.Admin.Product.CreateProductActivity;
 import com.example.pig_shop_app.Admin.Product.ProductTable;
+import com.example.pig_shop_app.Admin.User.AdminMain;
 import com.example.pig_shop_app.R;
 import com.example.pig_shop_app.User.Blogs.BlogList;
 
@@ -25,6 +26,11 @@ public class AdminActivity extends AppCompatActivity {
             Intent intent = new Intent(this, BlogList.class);
             startActivity(intent);
         });
+        findViewById(R.id.user_button).setOnClickListener(view -> {
+            Intent intent = new Intent(this, AdminMain.class);
+            startActivity(intent);
+        });
+
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

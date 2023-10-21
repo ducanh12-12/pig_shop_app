@@ -10,4 +10,6 @@
     <color name="Purple">#FFBB86FC</color>
     <color name="PurpleVariant">#CA9FFF</color>
     <color name="transparent">#00000000</color>
+    <color name="lavender">#E6E6FA</color>
+
 </resources>

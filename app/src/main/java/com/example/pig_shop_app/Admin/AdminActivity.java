@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pig_shop_app.Admin.Product.ProductTable;
 import com.example.pig_shop_app.R;
+import com.example.pig_shop_app.User.Blogs.BlogList;
 
 public class AdminActivity extends AppCompatActivity {
     @Override
@@ -17,6 +18,10 @@ public class AdminActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         findViewById(R.id.pig_button).setOnClickListener(view -> {
             Intent intent = new Intent(this, ProductTable.class);
+            startActivity(intent);
+        });
+        findViewById(R.id.blog_button).setOnClickListener(view -> {
+            Intent intent = new Intent(this, BlogList.class);
             startActivity(intent);
         });
     }

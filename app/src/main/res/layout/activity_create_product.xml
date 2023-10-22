@@ -16,6 +16,7 @@
         android:id="@+id/product_image_edittext"
         android:layout_width="match_parent"
         android:layout_height="37dp"
+        android:padding="5dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/editext_background"
         android:hint="Tên sản phẩm" />
@@ -31,22 +32,24 @@
         android:layout_width="match_parent"
         android:layout_height="37dp"
         android:layout_marginBottom="16dp"
+        android:padding="5dp"
         android:background="@drawable/editext_background"
         android:hint="Tên sản phẩm" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:text="Giá kích cỡ" />
+        android:text="Kích cỡ" />
 
     <EditText
         android:id="@+id/product_size_edittext"
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:padding="5dp"
         android:textSize="16sp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/editext_background"
-        android:hint="Giá sản phẩm" />
+        android:hint="Kích cỡ" />
     <TextView
         android:id="@+id/textView9"
         android:layout_width="match_parent"
@@ -59,6 +62,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textSize="16sp"
+        android:padding="5dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/editext_background"
         android:hint="Giá sản phẩm" />
@@ -66,6 +70,7 @@
     <TextView
         android:id="@+id/textView12"
         android:layout_width="match_parent"
+
         android:layout_height="wrap_content"
         android:text="Mô tả" />
 
@@ -74,16 +79,32 @@
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_marginBottom="16dp"
+        android:padding="5dp"
         android:background="@drawable/editext_background"
         android:hint="Mô tả" />
 
-    <Button
-        android:id="@+id/create_product_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16sp"
-        android:layout_gravity="center"
-        android:background="@drawable/background_btn"
-        android:text="Create Product" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginStart="@android:dimen/app_icon_size"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/create_product_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/background_btn"
+            android:text="Thêm mới" />
+
+        <Button
+            android:id="@+id/delete_button_pd"
+            android:layout_width="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/background_btn"
+            android:text="Xoá" />
+    </LinearLayout>
 
 </LinearLayout>

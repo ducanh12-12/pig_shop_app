@@ -1,4 +1,4 @@
-package com.example.pig_shop_app.User.Blogs;
+package com.example.pig_shop_app.Admin.Blogs;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -6,15 +6,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
@@ -26,14 +22,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 public class EditPostActivity extends AppCompatActivity {
 
     public EditText titleEditText;
@@ -86,16 +78,20 @@ public class EditPostActivity extends AppCompatActivity {
                 postImageView.setImageURI(Uri.parse(selectedImagePath));
             }
         findViewById(R.id.edit_button).setOnClickListener(view -> {
-            if (action.equals("edit")) {
-                title =titleEditText.getText().toString();
-                content =contentEditText.getText().toString();
-                date = datetEditText.getText().toString();
-                updatePost(id,title,content,date,"", "update");
-            } else  {
-                title =titleEditText.getText().toString();
-                content =contentEditText.getText().toString();
-                date = datetEditText.getText().toString();
-                updatePost(id,title,content,date,"", "add");
+            if (titleEditText.getText().toString().isEmpty() || contentEditText.getText().toString().isEmpty() || datetEditText.getText().toString().isEmpty()) {
+                Toast.makeText(EditPostActivity.this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            } else {
+                if (action.equals("edit")) {
+                    title =titleEditText.getText().toString();
+                    content =contentEditText.getText().toString();
+                    date = datetEditText.getText().toString();
+                    updatePost(id,title,content,date,"", "update");
+                } else  {
+                    title =titleEditText.getText().toString();
+                    content =contentEditText.getText().toString();
+                    date = datetEditText.getText().toString();
+                    updatePost(id,title,content,date,"", "add");
+                }
             }
         });
             findViewById(R.id.delete_button).setOnClickListener(view -> {
@@ -166,7 +162,7 @@ public class EditPostActivity extends AppCompatActivity {
                         }
                     });
         }
-    }
+    }  FirebaseDatabase.getInstance().getReference("blogs")
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

@@ -25,12 +25,13 @@
             >
         </activity>
         <activity android:name=".Admin.AdminActivity" android:label="Quản trị dự án"></activity>
-        <activity android:name=".Admin.Product.CreateProductActivity" android:label="Tạo sản phẩm"></activity>
+        <activity android:name=".Admin.Product.CreateProductActivity" android:label="Sản phẩm"></activity>
         <activity android:name=".Admin.Product.ProductTable" android:label="Danh sách sản phẩm"></activity>
-        <activity android:name=".User.Blogs.BlogList" android:label="Danh sách bài viết"></activity>
-        <activity android:name=".User.Blogs.EditPostActivity" android:label="Bài viết"></activity>
-        <activity android:name=".User.Blogs.PostDetail" android:label="Bài viết chi tiết"></activity>
+        <activity android:name=".Admin.Blogs.BlogList" android:label="Danh sách bài viết"></activity>
+        <activity android:name=".Admin.Blogs.EditPostActivity" android:label="Bài viết"></activity>
+        <activity android:name=".Admin.Blogs.PostDetail" android:label="Bài viết chi tiết"></activity>
         <activity android:name=".Admin.User.AdminMain" android:label="Danh sách admin"></activity>
+        <activity android:name=".Admin.Cart.CartTable" android:label="Danh sách đơn hàng"></activity>
         <activity android:name=".Admin.User.Add" android:label="Admin"></activity>
         <activity android:name=".Admin.User.Login" android:label="Đăng nhập"></activity>
         <activity

@@ -14,31 +14,54 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="16dp">
-
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên bài viết" />
             <EditText
                 android:id="@+id/title"
                 android:layout_width="match_parent"
+                android:background="@drawable/editext_background"
                 android:layout_height="wrap_content"
+                android:minLines="2"
+                android:padding="5dp"
                 android:hint="Nhập tên bài viết" />
-
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nôi dung:" />
             <EditText
                 android:id="@+id/content"
                 android:layout_width="match_parent"
+                android:padding="5dp"
                 android:layout_height="wrap_content"
                 android:elegantTextHeight="false"
+                android:background="@drawable/editext_background"
                 android:hint="Nhập nội dung bài viết"
                 android:minLines="2" />
-
+            <TextView
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ngày nhập" />
             <EditText
                 android:id="@+id/date"
                 android:layout_width="match_parent"
+                android:background="@drawable/editext_background"
                 android:layout_height="wrap_content"
+                android:minLines="2"
+                android:padding="5dp"
                 android:hint="Nhập ngày nhập bài viết" />
 
             <ImageView
                 android:id="@+id/image_view_post"
-                android:layout_width="282dp"
-                android:layout_height="449dp"
+                android:layout_width="296dp"
+                android:layout_height="296dp"
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/lon" />

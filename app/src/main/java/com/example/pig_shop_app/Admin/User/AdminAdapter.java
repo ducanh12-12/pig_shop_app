@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.pig_shop_app.Admin.Product.CreateProductActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -233,6 +234,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
         });
     }
     private void showDatePickerDialog(final EditText dateEditText) {
+        //khi click vào sẽ hiên ra ngay hien tai
         final Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
@@ -243,11 +245,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
 
         DatePickerDialog datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+            public void onDateSet(DatePicker datePicker, int i, int i1, int i2) { //truyền vào 3 kiểu năm, tháng, ngày
                 // Lưu ngày sinh vào EditText
-                calendar.set(i, i1, i2);
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                dateEditText.setText(simpleDateFormat.format(calendar.getTime()));
+                calendar.set(i, i1, i2); //set giá trị cho edittext theo ngày mà ta chon
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy"); //Đinh dang ngaỳ/thang/năm
+                dateEditText.setText(simpleDateFormat.format(calendar.getTime())); //truyen du  lieu
             }
         }, year, month, day);
 
@@ -262,21 +264,19 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
         DatabaseReference adminRef = FirebaseDatabase.getInstance().getReferenceFromUrl("https://pig-shop-default-rtdb.asia-southeast1.firebasedatabase.app/")
                 .child("admin").child(adminId);
 
-        adminRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()) {
-                    // Xóa thành công trên Firebase, cập nhật danh sách
-                    items.remove(position);
-                    notifyItemRemoved(position);
-                    notifyItemRangeChanged(position, items.size());
-
-                    Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+        adminRef.removeValue()
+            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
+                    Toast.makeText(context, "Xoá sản phẩm thành công", Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
+            })
+                    .addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    Toast.makeText(context,"Xoá sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
     }
 
     @Override

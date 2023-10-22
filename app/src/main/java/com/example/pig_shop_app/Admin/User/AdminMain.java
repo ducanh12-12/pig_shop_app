@@ -24,8 +24,10 @@ import java.util.List;
 public class AdminMain extends AppCompatActivity {
 
     FloatingActionButton float_add;
+    //tham chiêú csdl fỉrebase
     private final DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
+    // danh sach luu tru thong tin ngươì dùng
     private  final List<AdminItems> myItemsList = new ArrayList<>();
 
     private String userRole;
@@ -60,8 +62,10 @@ public class AdminMain extends AppCompatActivity {
 
                 myItemsList.clear();
 
+                //lấy dữ liêụ từ firebase
                 for (DataSnapshot admin : snapshot.child("admin").getChildren()) {
 
+                    //Lấy thông tin chi tiêt về người dunfg từ firebase và lưu trữ từng ngươì dùng vào danh sach
                     if (admin.hasChild("name") && admin.hasChild("date") && admin.hasChild("email") && admin.hasChild("phone") && admin.hasChild("role") && admin.hasChild("pass")) {
                         final String getname = admin.child("name").getValue(String.class);
                         final String getdate = admin.child("date").getValue(String.class);
@@ -73,9 +77,11 @@ public class AdminMain extends AppCompatActivity {
 
                         AdminItems myItems = new AdminItems(getAdminId, getname, getdate, getphone, getemail, getrole, getpass);
 
+                        //Thêm dữ liêụ vào danh sach luu tru
                         myItemsList.add(myItems);
                     }
                 }
+                //user đươc add vào recyclerview
                 recyclerView.setAdapter(new AdminAdapter(myItemsList, AdminMain.this));
             }
 

@@ -4,6 +4,7 @@ public class AdminItems {
     private String adminId;
     private String name, date, phone, email, role, pass;
 
+    //hàm khơỉ taọ gán giá trị măc dinh
     public AdminItems(String adminId, String name, String date, String phone, String email, String role, String pass) {
         this.adminId = adminId;
         this.name = name;

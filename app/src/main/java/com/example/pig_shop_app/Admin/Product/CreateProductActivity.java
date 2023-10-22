@@ -1,16 +1,21 @@
 package com.example.pig_shop_app.Admin.Product;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.pig_shop_app.User.Product.Product;
 import com.example.pig_shop_app.R;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +30,7 @@ public class CreateProductActivity extends AppCompatActivity {
     private EditText productSizeEditText;
     private EditText productImageEditText;
     private Button createProductButton;
+    private Button deleteButton;
     private DatabaseReference databaseReference;
 
     @Override
@@ -38,10 +44,12 @@ public class CreateProductActivity extends AppCompatActivity {
         productSizeEditText = findViewById(R.id.product_size_edittext);
         productDescriptionEditText = findViewById(R.id.product_description_edittext);
         createProductButton = findViewById(R.id.create_product_button);
+        deleteButton = findViewById(R.id.delete_button_pd);
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("pigs");
         String productId = getIntent().getStringExtra("product_id");
         if (productId != null) {
+            createProductButton.setText("Sửa sản phẩm");
             FirebaseDatabase.getInstance().getReference("pigs").child(productId)
                     .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -62,8 +70,9 @@ public class CreateProductActivity extends AppCompatActivity {
                             // Xử lý lỗi
                         }
             });
+        } else {
+            deleteButton.setVisibility(View.INVISIBLE);
         }
-
         createProductButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -78,14 +87,83 @@ public class CreateProductActivity extends AppCompatActivity {
                 Product product = new Product(productImage,productDescription,productPrice, productSize, productName);
 
                 // Thêm sản phẩm mới vào Firebase Realtime Database
-                String productId = databaseReference.push().getKey();
-                if (productId != null) {
-                    databaseReference.child(productId).setValue(product);
-                    finish(); // Đóng màn hình sau khi tạo sản phẩm
+                if (productId == null) {
+                    String productId = databaseReference.push().getKey();
+                    databaseReference.child(productId).setValue(product)
+                         .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(CreateProductActivity.this, "Thêm mới sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CreateProductActivity.this,"Thêm mới thất bại", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
+                } else {
+                    databaseReference.child(productId).setValue(product)
+                            .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(CreateProductActivity.this, "Cập nhật sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            })
+                            .addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(CreateProductActivity.this,"Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                }
+                            });
                 }
             }
         });
+        deleteButton.setOnClickListener(view -> {
+            showDeleteConfirmationDialog(productId);
+        });
+    }
+    public void showDeleteConfirmationDialog(final String productId) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(CreateProductActivity.this);
+        alertDialogBuilder.setTitle("Xác nhận xoá");
+        alertDialogBuilder.setMessage("Bạn có chắc chắn muốn xoá sản phẩm này?");
+        alertDialogBuilder.setPositiveButton("Xoá", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteProduct(productId);
+            }
+        });
+        alertDialogBuilder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        alertDialogBuilder.create().show();
+    }
 
+    public void deleteProduct(String productId) {
+        if (productId != null && !productId.isEmpty()) {
+            databaseReference.child(productId).removeValue()
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(CreateProductActivity.this, "Xoá sản phẩm thành công", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(CreateProductActivity.this,"Xoá sản phẩm thất bại", Toast.LENGTH_SHORT).show();
+                            finish();
+                        }
+                    });
+        }
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {

@@ -3,6 +3,7 @@ package com.example.pig_shop_app.Admin.User;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -31,7 +32,7 @@ public class Add extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final EditText name = findViewById(R.id.edt_name);
         final EditText date = findViewById(R.id.edt_date);
         final EditText phone = findViewById(R.id.edt_phone);
@@ -149,5 +150,13 @@ public class Add extends AppCompatActivity {
         }, year, month, day);
 
         datePickerDialog.show();
+    }
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            // Handle the back button click event here.
+            onBackPressed(); // This will simulate the Back button press.
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

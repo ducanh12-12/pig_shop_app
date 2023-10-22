@@ -1,4 +1,4 @@
-package com.example.pig_shop_app.User.Blogs;
+package com.example.pig_shop_app.Admin.Blogs;
 
 public class Post {
     public String id;

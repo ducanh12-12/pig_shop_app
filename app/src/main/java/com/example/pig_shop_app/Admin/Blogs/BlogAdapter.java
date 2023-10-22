@@ -1,4 +1,4 @@
-package com.example.pig_shop_app.User.Blogs;
+package com.example.pig_shop_app.Admin.Blogs;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.pig_shop_app.R;
-import com.example.pig_shop_app.User.Product.Product;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
